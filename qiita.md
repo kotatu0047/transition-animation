@@ -74,13 +74,13 @@ export default Menu
 ```js
 import React, { Component } from 'react';
 import './App.css';
-import Menu from "./Menu";
+import Menu from "./Menu"; // <= 作成したメニュー画面を読み込み
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Menu/>
+        <Menu/> //<= さっきコンテンツを削除した場所にメニュー画面を配置
       </div>
     );
   }
