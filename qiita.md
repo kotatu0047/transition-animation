@@ -1,9 +1,11 @@
 ### 結論
+
 とりあえずそれっぽい動きができた
 
 プロジェクトの作成から`react-router-dom`の使い方まで順を追って説明するので、アニメーションのとこだけ見たいってひとは　　まで飛ばしてつかぁさい
 
 ### プロジェクトの作成
+
 特にwebpack.config.js等で特殊なことをする訳ではないので、環境構築は  [Create React App](https://github.com/facebookincubator/create-react-app)に丸投げします。
 
 ```sh
@@ -14,6 +16,7 @@
 とりあえずテスト用の環境が作成されます
 
 ### 必要なモジュールのインストール
+
 ルーティング兼ヒストリーAPI操作用の `react-router-dom` と、アニメーション用に `react-transition-group` を使用するのでインストール
 
 ```sh
@@ -22,7 +25,6 @@
 
 元々あったApp.jsの中のコンテンツは不要なので消しておきましょう
 
-```js : App.js
 ```js
 import React, { Component } from 'react';
 import './App.css';
@@ -41,9 +43,9 @@ class App extends Component {
 ```
 
 ### メニュー画面の作成
+
 App.jsがあった場所と同じディレクトリに、Menu.jsを作成します。一先ず雛形だけ作成します。
 
-```js : Menu.js
 ```js
 import React from "react";
 
@@ -66,7 +68,7 @@ export default  Menu
 ```
 
 作成したメニュー画面を、さっきのApp.jsで読み込みます
-```js : App.js
+
 ```js
 import React, { Component } from 'react';
 import './App.css';
@@ -86,6 +88,7 @@ class App extends Component {
 ```
 
 サーバーを起動すると、以下のような画面が表示されます
+
 ```sh
     $ npm run start
 ```
