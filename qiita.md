@@ -44,7 +44,7 @@ class App extends Component {
 
 ### メニュー画面の作成
 
-App.jsがあった場所と同じディレクトリに、Menu.jsを作成します。一先ず雛形だけ作成します。
+App.jsがあった場所と同じディレクトリに、Menu.jsを作成します。一先ず何の動きもないメニュー画面の雛形だけ作成します。
 
 ```js
 import React from "react";
@@ -58,6 +58,7 @@ const Menu = () => {
     return (
         <div style={{width: '500px', textAlign: 'left'}}>
             <ul style={{display: 'flex'}}>
+                <li style={liStyle}>top</li>
                 <li style={liStyle}>page1</li>
                 <li style={liStyle}>page2</li>
                 <li style={liStyle}>page3</li>
@@ -93,5 +94,7 @@ class App extends Component {
 ```sh
     $ npm run start
 ```
+
+![ひながた](https://qiita-image-store.s3.amazonaws.com/0/222400/3bac2c1b-f10e-ccfe-e125-f90c3243077c.png)
 
 ここから、`react-router-dom`を使用して、 『top page1 page2 page3 』 をクリックした時に、画面遷移が発生するようにしていきます。
