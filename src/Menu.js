@@ -17,16 +17,16 @@ const Menu = () => {
 
     return (
         <Router>
-            <TransitionGroup>
-                <CSSTransition classNmaes='fade' timeout={500}>
-                    <div style={{width: '500px', textAlign: 'left'}}>
-                        <ul style={{display: 'flex'}}>
-                            <li style={liStyle}><Link to='/'>top</Link></li>
-                            <li style={liStyle}><Link to='/page1'>page1</Link></li>
-                            <li style={liStyle}><Link to='/page2'>page2</Link></li>
-                            <li style={liStyle}><Link to='/page3'>page3</Link></li>
-                        </ul>
+            <div style={{width: '500px', textAlign: 'left'}}>
+                <ul style={{display: 'flex'}}>
+                    <li style={liStyle}><Link to='/'>top</Link></li>
+                    <li style={liStyle}><Link to='/page1'>page1</Link></li>
+                    <li style={liStyle}><Link to='/page2'>page2</Link></li>
+                    <li style={liStyle}><Link to='/page3'>page3</Link></li>
+                </ul>
 
+                <TransitionGroup>
+                    <CSSTransition classNmaes='fade' timeout={500}>
                         <div style={{marginLeft: '50px'}}>
                             <Switch>
                                 <Route path='/' exact component={topPage}/>
@@ -36,9 +36,9 @@ const Menu = () => {
                                 <Route exact component={page404}/>
                             </Switch>
                         </div>
-                    </div>
-                </CSSTransition>
-            </TransitionGroup>
+                    </CSSTransition>
+                </TransitionGroup>
+            </div>
         </Router>)
 }
 

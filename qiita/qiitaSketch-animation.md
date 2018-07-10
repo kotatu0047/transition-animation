@@ -21,7 +21,11 @@ import React from 'react';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
 
-//中略
+const topPage = () => <div><h1>Top Page</h1>ここがトップページです</div>
+const page1 = () => <div><h1>page1</h1>1枚目のページです</div>
+const page2 = () => <div><h1>page2</h1>2枚目のページです</div>
+const page3 = () => <div><h1>page3</h1>3枚目のページです</div>
+const page404 = () => <div><h1>404</h1>存在しないページです</div>
 
 const Menu = () => {
     const liStyle = {
@@ -31,16 +35,16 @@ const Menu = () => {
 
     return (
         <Router>
-            <TransitionGroup>
-                <CSSTransition classNmaes='fade' timeout={500}>
-                    <div style={{width: '500px', textAlign: 'left'}}>
-                        <ul style={{display: 'flex'}}>
-                            <li style={liStyle}><Link to='/'>top</Link></li>
-                            <li style={liStyle}><Link to='/page1'>page1</Link></li>
-                            <li style={liStyle}><Link to='/page2'>page2</Link></li>
-                            <li style={liStyle}><Link to='/page3'>page3</Link></li>
-                        </ul>
+            <div style={{width: '500px', textAlign: 'left'}}>
+                <ul style={{display: 'flex'}}>
+                    <li style={liStyle}><Link to='/'>top</Link></li>
+                    <li style={liStyle}><Link to='/page1'>page1</Link></li>
+                    <li style={liStyle}><Link to='/page2'>page2</Link></li>
+                    <li style={liStyle}><Link to='/page3'>page3</Link></li>
+                </ul>
 
+                <TransitionGroup>
+                    <CSSTransition classNmaes='fade' timeout={500}>
                         <div style={{marginLeft: '50px'}}>
                             <Switch>
                                 <Route path='/' exact component={topPage}/>
@@ -50,14 +54,41 @@ const Menu = () => {
                                 <Route exact component={page404}/>
                             </Switch>
                         </div>
-                    </div>
-                </CSSTransition>
-            </TransitionGroup>
+                    </CSSTransition>
+                </TransitionGroup>
+            </div>
         </Router>)
 }
 
 export default Menu
 ```
+
+ページ全体が `CSSTransition`と `TransitionGroup`でラップされています。`CSSTransition`は、classNmaesを指定することで、子コンポーネントに自動的にクラス名をセットしてくれるコンポーネントです。 セットされるクラス名は次の通りです。
+
+| クラス名がセットされるタイミング | クラス名                                |
+| ---------------- | ----------------------------------- |
+| 追加時              | classNmaes +   "-enter"             |
+| 追加開始             | classNmaes +   "-enter-active"      |
+| 追加完了             | classNmaes +   "-enter-active-done" |
+| 削除時              | classNmaes +   "-exit"              |
+| 削除開始             | classNmaes +   "-exit-active"       |
+| 削除完了             | classNmaes +   "-exit-active-done"  |
+| マウント時            | classNmaes +   "-appear"            |
+| マウント開始           | classNmaes +   "-appear-active"     |
+
+#### 参考
+
+-   [【React】react-transition-groupを使ってCSSのアニメーションを実装する](http://hydro-pump.hatenablog.com/entry/2018/05/18/061601)
+
+なお、追加や削除は、timeoutに指定した時間分ゆっくり行われます。
+
+`TransitionGroup`は、子コンポーネントの中でマウント-アンマウントや削除、追加が行われていないかをtrackingし、発見した場合、`CSSTransition`の機能を適用する役割をここでは持ちます。
+
+### CSSの定義
+
+#### 予防線
+
+この記事を書くにあたり、aclは公式のドキュメントを何回か読み返しましたが、未だに自分でもいまいち理解できないまま、『とりあえず成功したコードがあるから』という軽い気持ちでこの記事を作ってしまたので、もしかしたらどこか間違いがあるかもしれません。
 
 #### 参考
 
