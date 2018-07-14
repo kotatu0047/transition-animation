@@ -26,12 +26,15 @@ SOFTWARE.
 import React, {Component} from 'react';
 import './App.css';
 import Menu from "./Menu";
+import { BrowserRouter  as Router } from "react-router-dom";
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-                <Menu/>
+                <Router>
+                    <Menu />
+                </Router>
             </div>
         );
     }
