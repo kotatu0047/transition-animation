@@ -43,6 +43,7 @@ const Menu = () => {
                     <li style={liStyle}><Link to='/page3'>page3</Link></li>
                 </ul>
 
+                {/*TransitionGroup と CSSTransition を追加*/}
                 <TransitionGroup>
                     <CSSTransition classNmaes='fade' timeout={500}>
                         <div style={{marginLeft: '50px'}}>
@@ -65,7 +66,7 @@ export default Menu
 
 ページ全体が `CSSTransition`と `TransitionGroup`でラップされています。`CSSTransition`は、classNmaesを指定することで、子コンポーネントに自動的にクラス名をセットしてくれるコンポーネントです。 セットされるクラス名は次の通りです。
 
-| クラス名がセットされるタイミング | クラス名                                |
+| クラス名がセットされるタイミング | セットされるクラス名                          |
 | ---------------- | ----------------------------------- |
 | 追加時              | classNmaes +   "-enter"             |
 | 追加開始             | classNmaes +   "-enter-active"      |
@@ -85,6 +86,42 @@ export default Menu
 `TransitionGroup`は、子コンポーネントの中でマウント-アンマウントや削除、追加が行われていないかをtrackingし、発見した場合、`CSSTransition`の機能を適用する役割をここでは持ちます。
 
 ### CSSの定義
+
+`CSSTransition`によって指定されるスタイルの中身を定義していきます。アニメーションさせたいプロパティに対して、　**transition** プロパティを定義していきます。
+
+Menu.jsと同じディレクトリにanimation.cssを作成します。
+
+```css
+.fade-enter {
+    opacity: 0;
+}
+.fade-enter-active {
+    transition: opacity 500ms linear;
+    opacity: 1;
+}
+.fade-exit {
+    transition: opacity 500ms linear;
+    opacity: 1;
+}
+.fade-exit-active {
+    opacity: 0;
+}
+```
+
+上記のCSSでは、DOMが追加(fade-enter-active)のとき、透過度を100%にした状態で追加され、500msかけて、透過度0%(fade-enter)になりフェードインする記述になっています。
+なお今回は、classNmaesに"fade"を指定したので、`CSSTransition`が付けてくれるクラス名は、"fade"+ "-enter"や、"fade" + "-enter-active"等になります。
+
+記述したCSSを読み込む記述をします。
+
+```js
+import './animation.css'
+```
+
+ここまでの書いたコードを実行しても、ページが一瞬で遷移してしまいます。これあくまで私の予測なのですが、`TransitionGroup`が、ページのマウント/アンマウントをtrackingできていないのではないかと思っています。
+
+### withRouterで、アニメーションのトリガーを作る
+
+`react-router-dom v4`には、`withRouter`というコンポーネントがあります。これで囲ったコンポーネントには、遷移時にlocationオブジェクトを引数に渡してくれるので、これを使用して、遷移時に`CSSTransition` のkeyを変更することで、アニメーション開始のトリガーとします。
 
 #### 予防線
 
