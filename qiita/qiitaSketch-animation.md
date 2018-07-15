@@ -96,11 +96,11 @@ Menu.jsと同じディレクトリにanimation.cssを作成します。
     opacity: 0;
 }
 .fade-enter-active {
-    transition: opacity 500ms linear;
+    transition: opacity 500ms ease-in;
     opacity: 1;
 }
 .fade-exit {
-    transition: opacity 500ms linear;
+    transition: opacity 500ms ease-in;
     opacity: 1;
 }
 .fade-exit-active {
@@ -145,7 +145,7 @@ const MenuBar = ({children ,style}) => (　　
                 <li style={liStyle}><Link to='/page2'>page2</Link></li>
                 <li style={liStyle}><Link to='/page3'>page3</Link></li>
             </ul>
-            {children} 
+            {children}
         </div>
     </div>
 )
@@ -158,14 +158,14 @@ const page404 = () => <div><h1>404</h1>存在しないページです</div>
 
 
 const Menu =  ({ location }) => {
-    const currentkey = location.pathname.split("/")[1] || ""
+    const currentkey = location.pathname.split("/")[1] || ""　　//追加
 
     return (
         <MenuBar style={{width: '500px', textAlign: 'left'}}>
             <TransitionGroup>
-                <CSSTransition key={currentkey} classNames='fade' timeout={500}>
+                <CSSTransition key={currentkey} classNames='fade' timeout={500}>  {/*追加*/}
                     <div style={{marginLeft: '50px'}}>
-                        <Switch>
+                        <Switch location={location}>    {/*追加*/}
                             <Route path='/' exact component={topPage}/>
                             <Route path='/page1' exact component={page1}/>
                             <Route path='/page2' exact component={page2}/>
@@ -201,6 +201,12 @@ class App extends Component {
 
 export default App;
 ```
+
+変更点ですが、まずメニューボタンの置き場を`MenuBar`として一つにまとめました。`MenuBar`の中で、childrenを描画するようにしてあります。次に、これまで全体を囲っていた`Route`を取っ払って、代わりに`MenuBar`で囲みます。そして、exportするものを、`withRouter`の処理をかけたものにします。これにより、遷移時にlocationオブジェクトが引数に渡されるため、`const currentkey = location.pathname.split("/")[1] || ""` で現在のUrlが取得できます。これを、`CSSTransition`のkeyに渡すことで、`TransitionGroup`によるtrackingが成功するようです。
+
+### CSSの追加でそれっぽく
+
+実行したものを見てみると確かにアニメーションを挿入されていますが、遷移前のページの下に、遷移後のページが一瞬描画されていたりして、なんともぎこちないです。これを、`position`プロパティの追加で、整えます。また、`transform: translateY`を利用して、横からスッと入ってくるようにします。
 
 #### 予防線
 

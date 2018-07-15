@@ -1,5 +1,5 @@
 .container {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     height: 100%;
@@ -9,18 +9,24 @@
 /*.fade-appear,*/
 .fade-enter {
     opacity: 0;
+    transform: translateX(150px);
 }
 
+/*.fade-appear-active,*/
 .fade-enter-active {
-    transition: opacity 500ms linear;
+    transition: opacity 500ms ease-in, transform 500ms ease-in;
     opacity: 1;
+    transform: translateX(0px);
 }
 
 .fade-exit {
-    transition: opacity 500ms linear;
+    transition: opacity 500ms ease-in, transform 500ms ease-in;
     opacity: 1;
+    transform: translateX(0px);
 }
 
 .fade-exit-active {
     opacity: 0;
+    transform: translateX(150px);
 }
+
