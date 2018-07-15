@@ -64,24 +64,24 @@ const Menu = () => {
 export default Menu
 ```
 
-ページ全体が `CSSTransition`と `TransitionGroup`でラップされています。`CSSTransition`は、classNmaesを指定することで、子コンポーネントに自動的にクラス名をセットしてくれるコンポーネントです。 セットされるクラス名は次の通りです。
+ページが `CSSTransition`と `TransitionGroup`でラップされています。`CSSTransition`は、classNmaesを指定することで、子コンポーネントに自動的にクラス名をセットしてくれるコンポーネントです。 セットされるクラス名は次の通りです。
 
-| クラス名がセットされるタイミング | セットされるクラス名                          |
-| ---------------- | ----------------------------------- |
-| 追加時              | classNmaes +   "-enter"             |
-| 追加開始             | classNmaes +   "-enter-active"      |
-| 追加完了             | classNmaes +   "-enter-active-done" |
-| 削除時              | classNmaes +   "-exit"              |
-| 削除開始             | classNmaes +   "-exit-active"       |
-| 削除完了             | classNmaes +   "-exit-active-done"  |
-| マウント時            | classNmaes +   "-appear"            |
-| マウント開始           | classNmaes +   "-appear-active"     |
+| クラス名がセットされるタイミング | セットされるクラス名              |
+|----------------------------------|-----------------------------------|
+| 追加時                           | classNmaes + "-enter"             |
+| 追加開始                         | classNmaes + "-enter-active"      |
+| 追加完了                         | classNmaes + "-enter-active-done" |
+| 削除時                           | classNmaes + "-exit"              |
+| 削除開始                         | classNmaes + "-exit-active"       |
+| 削除完了                         | classNmaes + "-exit-active-done"  |
+| マウント時                       | classNmaes + "-appear"            |
+| マウント開始                     | classNmaes + "-appear-active"     |
 
 #### 参考
 
--   [【React】react-transition-groupを使ってCSSのアニメーションを実装する](http://hydro-pump.hatenablog.com/entry/2018/05/18/061601)
+-	[【React】react-transition-groupを使ってCSSのアニメーションを実装する](http://hydro-pump.hatenablog.com/entry/2018/05/18/061601)
 
-なお、追加や削除は、timeoutに指定した時間分ゆっくり行われます。
+なお、追加や削除は、timeoutに指定した時間分ゆっくり行われます。(単位はms)
 
 `TransitionGroup`は、子コンポーネントの中でマウント-アンマウントや削除、追加が行われていないかをtrackingし、発見した場合、`CSSTransition`の機能を適用する役割をここでは持ちます。
 
@@ -108,8 +108,7 @@ Menu.jsと同じディレクトリにanimation.cssを作成します。
 }
 ```
 
-上記のCSSでは、DOMが追加(fade-enter-active)のとき、透過度を100%にした状態で追加され、500msかけて、透過度0%(fade-enter)になりフェードインする記述になっています。
-なお今回は、classNmaesに"fade"を指定したので、`CSSTransition`が付けてくれるクラス名は、"fade"+ "-enter"や、"fade" + "-enter-active"等になります。
+上記のCSSでは、DOMが追加(fade-enter-active)のとき、透過度を100%にした状態で追加され、500msかけて、透過度0%(fade-enter)になりフェードインする記述になっています。 なお今回は、classNmaesに"fade"を指定したので、`CSSTransition`が付けてくれるクラス名は、"fade"+ "-enter"や、"fade" + "-enter-active"等になります。
 
 記述したCSSを読み込む記述をします。
 
@@ -123,7 +122,7 @@ import './animation.css'
 
 `react-router-dom v4`には、`withRouter`というコンポーネントがあります。これで囲ったコンポーネントには、遷移時にlocationオブジェクトを引数に渡してくれるので、これを使用して、遷移時に`CSSTransition` のkeyを変更することで、アニメーション開始のトリガーとします。
 
-アニメーションのトリガーを作る前に、メニューボタンを配置している部分を独立させて、`prps.children`を描写させるようにします。どうも、こうしないと上手く動かいみたいです。理由は…よく分かりませんでした(´；ω；｀)
+アニメーションのトリガーを作る前に、メニューボタンを配置している部分を独立させて、`props.children`を描写させるようにします。どうも、こうしないと上手く動かいみたいです。理由は…よく分かりませんでした(´；ω；｀)
 
 ```js
 import React from 'react';
@@ -206,7 +205,7 @@ export default App;
 
 ### CSSの追加でそれっぽく
 
-実行したものを見てみると確かにアニメーションを挿入されていますが、遷移前のページの下に、遷移後のページが一瞬描画されていたりして、なんともぎこちないです。これを、`position`プロパティの追加で、整えます。また、`transform: translateY`を利用して、横からスッと入ってくるようにします。
+実行したものを見てみると確かにアニメーションを挿入されていますが、遷移前のページの下に、遷移後のページが一瞬描画されていたりして、スタイルが崩れています。これを、`position`プロパティの追加+`transform: translateY`を利用して、横からスッと入ってくるような動きに整えます。
 
 #### 予防線
 
@@ -214,4 +213,4 @@ export default App;
 
 #### 参考
 
--   <https://github.com/reactjs/react-transition-group/issues/136>
+-	https://github.com/reactjs/react-transition-group/issues/136
