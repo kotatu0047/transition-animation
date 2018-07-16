@@ -22,20 +22,11 @@ const MenuBar = ({children, style}) => (
     </div>
 )
 
-const pageStyle = {position: 'absolute'}
-
 const topPage = () => <div><h1>Top Page</h1>ここがトップページです</div>
 const page1 = () => <div><h1>page1</h1>1枚目のページです</div>
 const page2 = () => <div><h1>page2</h1>2枚目のページです</div>
 const page3 = () => <div><h1>page3</h1>3枚目のページです</div>
 const page404 = () => <div><h1>404</h1>存在しないページです</div>
-
-// const topPage = () => <div style={pageStyle}><h1>Top Page</h1>ここがトップページです</div>
-// const page1 = () => <div style={pageStyle}> <h1>page1</h1>1枚目のページです</div>
-// const page2 = () => <div style={pageStyle}><h1>page2</h1>2枚目のページです</div>
-// const page3 = () => <div style={pageStyle}><h1>page3</h1>3枚目のページです</div>
-// const page404 = () => <div style={pageStyle}><h1>404</h1>存在しないページです</div>
-
 
 const Menu = ({location}) => {
     const currentkey = location.pathname.split("/")[1] || ""
@@ -43,7 +34,7 @@ const Menu = ({location}) => {
     return (
         <MenuBar style={{width: '500px', textAlign: 'left'}}>
             <TransitionGroup >
-                <CSSTransition key={currentkey} classNames='fade' timeout={500} >
+                <CSSTransition key={currentkey} classNames='fade' timeout={800} >
                     <div style={{marginLeft: '50px', position: 'absolute'}}>
                         <Switch location={location}>
                             <Route path='/' exact component={topPage}/>

@@ -1,26 +1,16 @@
-.container {
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-}
-
-/*.fade-appear,*/
 .fade-enter {
     opacity: 0;
     transform: translateX(150px);
 }
 
-/*.fade-appear-active,*/
 .fade-enter-active {
-    transition: opacity 500ms ease-in, transform 500ms ease-in;
+    transition: opacity 800ms ease-out, transform 800ms ease-out;
     opacity: 1;
     transform: translateX(0px);
 }
 
 .fade-exit {
-    transition: opacity 500ms ease-in, transform 500ms ease-in;
+    transition: opacity 800ms ease-in, transform 800ms ease-in;
     opacity: 1;
     transform: translateX(0px);
 }

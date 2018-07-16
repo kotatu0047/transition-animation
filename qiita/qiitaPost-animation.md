@@ -2,7 +2,7 @@
 
 とりあえずそれっぽい動きができた。
 
-ここに動画
+![out.gif](https://qiita-image-store.s3.amazonaws.com/0/222400/6710c4bb-6175-f6cb-9392-a3ca57f8be53.gif)
 
 この記事は[react-router-dom v4 入門してみた](https://qiita.com/acl/items/81253b54b6b6713e1332)の続きになります。
 ここで使用しているコードは、[github](https://github.com/aclearworld/transition-animation)に置いてあります。
@@ -208,7 +208,7 @@ export default App;
 
 実行したものを見てみると確かにアニメーションを挿入されていますが、遷移前のページの下に、遷移後のページが一瞬描画されていたりして、スタイルが崩れています。これを、`position`プロパティの追加+`transform: translateY`を利用して、横からスッと入ってくるような動きに整えます。これで完成です。
 
-ここに動画
+![out.gif](https://qiita-image-store.s3.amazonaws.com/0/222400/6710c4bb-6175-f6cb-9392-a3ca57f8be53.gif)
 
 最終的なコードは以下のようになりました。
 
